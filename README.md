@@ -21,6 +21,7 @@ See [Troubleshooting Tips](doc/troubleshooting.md) as well as [Yarn tips](doc/ya
 - Aruba Networks
 - [Zed Worldwide](http://www.zed.com)
 - [KNIME](https://www.knime.org/)
+- [Azavea](http://azavea.com)
 
 ## Features
 
@@ -88,7 +89,7 @@ Then go ahead and start the job server using the instructions above.
 
 Let's upload the jar:
 
-    curl --data-binary @job-server-tests/target/job-server-tests-$VER.jar localhost:8090/jars/test
+    curl --data-binary @job-server-tests/target/scala-2.10/job-server-tests-$VER.jar localhost:8090/jars/test
     OK⏎
 
 #### Ad-hoc Mode - Single, Unrelated Jobs (Transient Context)
@@ -261,9 +262,10 @@ The ```-k``` flag tells curl to "Allow connections to SSL sites without certs". 
 ### Manual steps
 
 1. Copy `config/local.sh.template` to `<environment>.sh` and edit as appropriate.  NOTE: be sure to set SPARK_VERSION if you need to compile against a different version, ie. 1.4.1 for job server 0.5.2
-2. `bin/server_deploy.sh <environment>` -- this packages the job server along with config files and pushes
+2. Copy `config/local.conf.template` to `<environment>.conf` and edit as appropriate.
+3. `bin/server_deploy.sh <environment>` -- this packages the job server along with config files and pushes
    it to the remotes you have configured in `<environment>.sh`
-3. On the remote server, start it in the deployed directory with `server_start.sh` and stop it with `server_stop.sh`
+4. On the remote server, start it in the deployed directory with `server_start.sh` and stop it with `server_stop.sh`
 
 The `server_start.sh` script uses `spark-submit` under the hood and may be passed any of the standard extra arguments from `spark-submit`.
 
